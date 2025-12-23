@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Dependencies
+node_modules
+vendor
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea
+.vscode
+.fleet
+.phpactor.json
+.zed
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+.phpunit.result.cache
+
+# Documentation
+*.md
+!README.md
+
+# Tests
+tests
+phpunit.xml
+.phpunit.cache
+
+# Build artifacts
+public/hot
+public/build
+public/storage
+
+# Railway
+.railwayignore
+
+# Other
+Homestead.json
+Homestead.yaml
+

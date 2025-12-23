@@ -1,6 +1,6 @@
 # 🚂 Guía de Despliegue en Railway
 
-Esta guía te ayudará a desplegar tu aplicación Laravel en Railway.
+Esta guía te ayudará a desplegar tu aplicación Laravel en Railway usando Docker.
 
 ## 📋 Requisitos Previos
 
@@ -14,11 +14,12 @@ Esta guía te ayudará a desplegar tu aplicación Laravel en Railway.
 
 Asegúrate de que todos los archivos de configuración estén en el repositorio:
 
-- ✅ `Procfile` - Define el comando de inicio
-- ✅ `railway.json` - Configuración de Railway
-- ✅ `.railwayignore` - Archivos a ignorar en el despliegue
+- ✅ `Dockerfile` - Configuración de Docker con PHP 8.3
+- ✅ `.dockerignore` - Archivos a ignorar en el build de Docker
+- ✅ `railway.json` - Configuración de Railway para usar Docker
+- ✅ `Procfile` - Define el comando de inicio (opcional con Docker)
 
-**Nota**: Railway detectará automáticamente que es un proyecto Laravel y configurará PHP y Composer automáticamente. No necesitas `nixpacks.toml` a menos que necesites una configuración personalizada.
+**Nota**: Este proyecto usa Docker para tener control total sobre la versión de PHP (8.3) y evitar problemas de compatibilidad con dependencias.
 
 ### 2. Conectar con Railway
 
@@ -99,12 +100,17 @@ DB_PASSWORD=${{MySQL.MYSQL_PASSWORD}}
 
 ### 5. Configurar Build y Deploy
 
-Railway detectará automáticamente que es un proyecto Laravel y usará la configuración en `nixpacks.toml` y `railway.json`.
+Railway usará el `Dockerfile` para construir la imagen de Docker. El proceso de build ejecutará:
 
-El proceso de build ejecutará:
-1. `composer install --no-dev --optimize-autoloader`
-2. `npm ci`
-3. `npm run build`
+1. Instalación de PHP 8.3 y extensiones necesarias
+2. Instalación de Composer
+3. Instalación de Node.js y npm
+4. `composer install --no-dev --optimize-autoloader`
+5. `npm ci`
+6. `npm run build`
+7. Optimización de autoloader y caché de Laravel
+
+El Dockerfile está optimizado para producción y usa PHP 8.3 para cumplir con los requisitos de las dependencias.
 
 ### 6. Ejecutar Migraciones
 
@@ -152,19 +158,14 @@ Una vez completado el despliegue:
 
 ### Optimización para Producción
 
-Railway ejecutará automáticamente:
-- `composer install --no-dev --optimize-autoloader` (optimiza autoloader)
-- `npm run build` (compila assets)
+El Dockerfile ya incluye todas las optimizaciones necesarias:
+- ✅ PHP 8.3 con todas las extensiones necesarias
+- ✅ `composer install --no-dev --optimize-autoloader` (optimiza autoloader)
+- ✅ `npm run build` (compila assets)
+- ✅ `npm prune --production` (elimina dependencias de desarrollo)
+- ✅ Caché de configuración, rutas y vistas al iniciar
 
-Puedes agregar comandos adicionales en `railway.json`:
-
-```json
-{
-  "build": {
-    "buildCommand": "composer install --no-dev --optimize-autoloader && npm ci && npm run build && php artisan config:cache && php artisan route:cache && php artisan view:cache"
-  }
-}
-```
+El contenedor Docker está optimizado para producción y es más eficiente que usar Nixpacks.
 
 ### Variables de Entorno Sensibles
 
@@ -201,7 +202,7 @@ Solución:
 
 ### Error: "Class not found" o errores de autoload
 
-Solución: El build debería ejecutar `composer install --optimize-autoloader`. Verifica que el build se complete correctamente.
+Solución: El Dockerfile ejecuta `composer install --optimize-autoloader` y `composer dump-autoload --optimize`. Verifica que el build de Docker se complete correctamente. Si el problema persiste, verifica que todas las dependencias estén en `composer.json`.
 
 ### Error: "Assets not found" o CSS/JS no carga
 
@@ -212,10 +213,11 @@ Solución:
 
 ### Error: "Permission denied" en storage
 
-Solución: Railway maneja los permisos automáticamente, pero si hay problemas, puedes agregar en el build:
-```bash
-chmod -R 775 storage bootstrap/cache
-```
+Solución: El Dockerfile ya establece los permisos correctos (`chmod -R 775 storage bootstrap/cache`). Si el problema persiste, verifica que los directorios existan y tengan los permisos correctos.
+
+### Error: "PHP version mismatch" o problemas con dependencias
+
+Solución: El Dockerfile usa PHP 8.3 que cumple con todos los requisitos. Si ves errores de versión, verifica que Railway esté usando el Dockerfile y no Nixpacks. En `railway.json` debe estar configurado `"builder": "DOCKERFILE"`.
 
 ## 📚 Recursos Adicionales
 
