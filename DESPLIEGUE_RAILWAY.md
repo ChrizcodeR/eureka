@@ -186,12 +186,26 @@ Para archivos persistentes, considera usar:
 
 ## 🐛 Solución de Problemas
 
-### Error: "APP_KEY is not set"
+### Error: "APP_KEY is not set" o "MissingAppKeyException"
 
-Solución: Agrega `APP_KEY` en las variables de entorno de Railway. Puedes generarla con:
-```bash
-php artisan key:generate --show
-```
+**Solución Rápida:**
+
+1. **Genera la clave** usando Railway CLI:
+   ```bash
+   railway run php artisan key:generate --show
+   ```
+
+2. **O genera una clave manualmente:**
+   ```bash
+   php -r "echo 'base64:' . base64_encode(random_bytes(32)) . PHP_EOL;"
+   ```
+
+3. **Agrega la variable en Railway:**
+   - Ve a **Variables** en el panel de Railway
+   - Agrega: `APP_KEY` = `base64:TU_CLAVE_GENERADA`
+   - Guarda y espera a que se redespliegue
+
+**Nota:** El Dockerfile intentará generar la clave automáticamente si no existe, pero es mejor configurarla manualmente en Railway para mayor seguridad.
 
 ### Error: "Database connection failed"
 
