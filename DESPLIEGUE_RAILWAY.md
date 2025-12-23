@@ -16,9 +16,9 @@ Asegúrate de que todos los archivos de configuración estén en el repositorio:
 
 - ✅ `Procfile` - Define el comando de inicio
 - ✅ `railway.json` - Configuración de Railway
-- ✅ `nixpacks.toml` - Configuración de build
-- ✅ `.env.example` - Plantilla de variables de entorno
 - ✅ `.railwayignore` - Archivos a ignorar en el despliegue
+
+**Nota**: Railway detectará automáticamente que es un proyecto Laravel y configurará PHP y Composer automáticamente. No necesitas `nixpacks.toml` a menos que necesites una configuración personalizada.
 
 ### 2. Conectar con Railway
 
