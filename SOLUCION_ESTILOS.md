@@ -14,7 +14,7 @@ Los estilos CSS y JavaScript no se cargan, la aplicación se ve sin formato.
 
 ### 1. Verificar APP_URL en Railway ⚠️ IMPORTANTE
 
-La variable `APP_URL` debe coincidir exactamente con la URL de tu aplicación en Railway:
+La variable `APP_URL` debe coincidir exactamente con la URL de tu aplicación en Railway y **DEBE usar HTTPS**:
 
 1. Ve a Railway → Tu proyecto → **Settings** → **Networking**
 2. Copia la URL exacta (ejemplo: `https://tu-app.up.railway.app`)
@@ -22,9 +22,12 @@ La variable `APP_URL` debe coincidir exactamente con la URL de tu aplicación en
    ```env
    APP_URL=https://tu-app.up.railway.app
    ```
+   ⚠️ **DEBE empezar con `https://`** (no `http://`)
    ⚠️ **Sin barra final** (`/`) al final
 
 4. Guarda y espera a que se redespliegue
+
+**Si los assets se cargan con `http://` en lugar de `https://`, ver `SOLUCION_HTTPS.md`**
 
 ### 2. Limpiar caché de vistas
 
