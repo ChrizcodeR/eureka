@@ -25,7 +25,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     pcntl \
     bcmath \
     gd \
-    zip
+    zip \
+    ftp
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
