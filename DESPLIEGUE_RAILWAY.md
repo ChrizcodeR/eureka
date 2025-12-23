@@ -218,12 +218,33 @@ Solución:
 
 Solución: El Dockerfile ejecuta `composer install --optimize-autoloader` y `composer dump-autoload --optimize`. Verifica que el build de Docker se complete correctamente. Si el problema persiste, verifica que todas las dependencias estén en `composer.json`.
 
-### Error: "Assets not found" o CSS/JS no carga
+### Error: "Assets not found" o CSS/JS no carga / La app se ve sin estilos
 
-Solución: 
-1. Verifica que `npm run build` se ejecute durante el build
-2. Verifica que la carpeta `public/build` esté presente
-3. Asegúrate de que `APP_URL` esté configurada correctamente
+**Solución:**
+
+1. **Verifica APP_URL** (más común):
+   - Debe coincidir exactamente con la URL de Railway
+   - Ejemplo: `APP_URL=https://tu-app.up.railway.app` (sin barra final)
+   - Ve a Railway → Variables y actualiza `APP_URL`
+
+2. **Limpiar caché de vistas:**
+   ```bash
+   railway run php artisan view:clear
+   railway run php artisan config:clear
+   ```
+
+3. **Verificar que los assets se compilaron:**
+   ```bash
+   railway run ls -la public/build/
+   ```
+   Debe existir `manifest.json` y archivos CSS/JS
+
+4. **Si los assets no existen, recompilar:**
+   ```bash
+   railway run npm run build
+   ```
+
+**Ver también:** `SOLUCION_ESTILOS.md` para más detalles.
 
 ### Error: "Permission denied" en storage
 

@@ -44,13 +44,13 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-script
 # Instalar dependencias de Node.js (necesitamos dev para build)
 RUN npm ci
 
-# Copiar el resto de los archivos de la aplicación
+# Copiar el resto de los archivos de la aplicación (excepto lo que ya copiamos)
 COPY . .
 
 # Ejecutar scripts post-install de Composer
 RUN composer dump-autoload --optimize
 
-# Compilar assets de frontend
+# Compilar assets de frontend (esto genera public/build y public/manifest.json)
 RUN npm run build
 
 # Limpiar dependencias de desarrollo de Node.js después del build

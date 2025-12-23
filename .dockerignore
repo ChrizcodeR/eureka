@@ -40,9 +40,8 @@ tests
 phpunit.xml
 .phpunit.cache
 
-# Build artifacts
+# Build artifacts (NO excluir public/build, se genera durante el build)
 public/hot
-public/build
 public/storage
 
 # Railway
