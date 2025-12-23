@@ -1,0 +1,15 @@
+node_modules
+vendor
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+.git
+.env
+.env.backup
+.phpunit.result.cache
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+
