@@ -28,7 +28,7 @@
             <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-indigo-300 rounded-full animate-particle-6"></div>
         </div>
     </div>
-    
+
     <div class="flex h-screen overflow-hidden relative z-10">
         <!-- Sidebar -->
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
@@ -83,7 +83,7 @@
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
                     <p class="px-4 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Configuración</p>
-                    
+
                     <a href="{{ route('accesos.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200 group">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
@@ -97,6 +97,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                         <span class="font-medium">Usuarios Sistema</span>
+                    </a>
+                    <a href="{{ route('configuracion.consola.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4zM8 9h8M8 13h5"></path>
+                        </svg>
+                        <span class="font-medium">Consola SQL</span>
                     </a>
                 </div>
 
@@ -183,11 +189,11 @@
                 <!-- Barra de búsqueda -->
                 <div class="mb-6">
                     <form action="{{ route('configuracion.usuarios-sistema.index') }}" method="GET" class="relative max-w-md">
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             name="search"
                             value="{{ $search ?? '' }}"
-                            placeholder="Buscar por nombre o email..." 
+                            placeholder="Buscar por nombre o email..."
                             class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white/80 backdrop-blur-xl transition-all shadow-sm"
                         >
                         <svg class="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,8 +280,8 @@
                     <div class="px-6 py-4 border-t border-gray-200">
                         <div class="flex items-center justify-between">
                             <div class="text-sm text-gray-600">
-                                Mostrando <span class="font-semibold">{{ $usuarios->firstItem() ?? 0 }}</span> a 
-                                <span class="font-semibold">{{ $usuarios->lastItem() ?? 0 }}</span> de 
+                                Mostrando <span class="font-semibold">{{ $usuarios->firstItem() ?? 0 }}</span> a
+                                <span class="font-semibold">{{ $usuarios->lastItem() ?? 0 }}</span> de
                                 <span class="font-semibold">{{ $usuarios->total() }}</span> resultados
                             </div>
                             <div class="flex items-center space-x-2">
@@ -322,10 +328,10 @@
                 @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         id="createNombre"
-                        name="nombre" 
+                        name="nombre"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Ej: JUAN PÉREZ"
@@ -334,9 +340,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input 
-                        type="email" 
-                        name="email" 
+                    <input
+                        type="email"
+                        name="email"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="usuario@ejemplo.com"
@@ -344,9 +350,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
-                    <input 
-                        type="password" 
-                        name="password" 
+                    <input
+                        type="password"
+                        name="password"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Mínimo 6 caracteres"
@@ -354,18 +360,18 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Contraseña</label>
-                    <input 
-                        type="password" 
-                        name="password_confirmation" 
+                    <input
+                        type="password"
+                        name="password_confirmation"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Repite la contraseña"
                     >
                 </div>
                 <div class="flex items-center">
-                    <input 
-                        type="checkbox" 
-                        name="activo" 
+                    <input
+                        type="checkbox"
+                        name="activo"
                         id="createActivo"
                         value="1"
                         checked
@@ -401,10 +407,10 @@
                 @method('PUT')
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         id="editNombre"
-                        name="nombre" 
+                        name="nombre"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         style="text-transform: uppercase;"
@@ -412,36 +418,36 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input 
-                        type="email" 
+                    <input
+                        type="email"
                         id="editEmail"
-                        name="email" 
+                        name="email"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                     >
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nueva Contraseña <span class="text-gray-400 text-xs">(dejar vacío para mantener la actual)</span></label>
-                    <input 
-                        type="password" 
-                        name="password" 
+                    <input
+                        type="password"
+                        name="password"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Mínimo 6 caracteres"
                     >
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Nueva Contraseña</label>
-                    <input 
-                        type="password" 
-                        name="password_confirmation" 
+                    <input
+                        type="password"
+                        name="password_confirmation"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Repite la contraseña"
                     >
                 </div>
                 <div class="flex items-center">
-                    <input 
-                        type="checkbox" 
-                        name="activo" 
+                    <input
+                        type="checkbox"
+                        name="activo"
                         id="editActivo"
                         value="1"
                         class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
@@ -524,7 +530,7 @@
             document.getElementById('editEmail').value = email;
             document.getElementById('editActivo').checked = activo;
             document.getElementById('editForm').action = `/configuracion/usuarios-sistema/${id}`;
-            
+
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');
         }
@@ -598,14 +604,14 @@
         .animate-wave-2 { animation: wave-2 32s ease-in-out infinite; }
         .animate-wave-3 { animation: wave-3 25s ease-in-out infinite; }
         .animate-wave-4 { animation: wave-4 30s ease-in-out infinite; }
-        
+
         @keyframes particle-1 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(120px, -180px) scale(2); opacity: 0.2; } }
         @keyframes particle-2 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; } 50% { transform: translate(-150px, 200px) scale(2.5); opacity: 0.15; } }
         @keyframes particle-3 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; } 50% { transform: translate(180px, 120px) scale(2.2); opacity: 0.25; } }
         @keyframes particle-4 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(-100px, -150px) scale(1.8); opacity: 0.3; } }
         @keyframes particle-5 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; } 50% { transform: translate(90px, -130px) scale(2.3); opacity: 0.2; } }
         @keyframes particle-6 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(-110px, 160px) scale(2); opacity: 0.25; } }
-        
+
         .animate-particle-1 { animation: particle-1 20s ease-in-out infinite; }
         .animate-particle-2 { animation: particle-2 24s ease-in-out infinite; }
         .animate-particle-3 { animation: particle-3 18s ease-in-out infinite; }
@@ -621,4 +627,3 @@
     </style>
 </body>
 </html>
-

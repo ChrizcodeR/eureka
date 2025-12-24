@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuarioSistemaController;
 use App\Http\Controllers\AccesoController;
+use App\Http\Controllers\ConsolaController;
 
 // Ruta pública para buscar usuario por cédula
 Route::get('/', [UsuarioController::class, 'publicSearch'])->name('public.search');
@@ -45,3 +46,8 @@ Route::get('/accesos/{id}/edit', [AccesoController::class, 'edit'])->name('acces
 Route::get('/accesos/{id}/password', [AccesoController::class, 'getPassword'])->name('accesos.password');
 Route::put('/accesos/{id}', [AccesoController::class, 'update'])->name('accesos.update');
 Route::delete('/accesos/{id}', [AccesoController::class, 'destroy'])->name('accesos.destroy');
+
+// Configuración - Consola SQL (requiere autenticación)
+Route::get('/configuracion/consola', [ConsolaController::class, 'index'])->name('configuracion.consola.index');
+Route::post('/configuracion/consola', [ConsolaController::class, 'execute'])->name('configuracion.consola.execute');
+Route::get('/configuracion/consola/columns', [ConsolaController::class, 'columns'])->name('configuracion.consola.columns');

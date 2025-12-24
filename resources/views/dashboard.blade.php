@@ -13,7 +13,7 @@
     <div class="fixed inset-0 z-0">
         <!-- Gradiente base boreal suave -->
         <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 via-indigo-50 to-purple-50"></div>
-        
+
         <!-- Ondas animadas grandes -->
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-blue-200/30 to-cyan-300/30 rounded-full mix-blend-multiply filter blur-3xl animate-wave-1"></div>
@@ -21,7 +21,7 @@
             <div class="absolute bottom-0 left-0 w-[550px] h-[550px] bg-gradient-to-br from-purple-200/30 to-pink-300/30 rounded-full mix-blend-multiply filter blur-3xl animate-wave-3"></div>
             <div class="absolute bottom-1/4 right-1/3 w-[450px] h-[450px] bg-gradient-to-br from-cyan-200/30 to-blue-300/30 rounded-full mix-blend-multiply filter blur-3xl animate-wave-4"></div>
         </div>
-        
+
         <!-- Partículas flotantes sutiles -->
         <div class="absolute inset-0 opacity-40">
             <div class="absolute top-20 left-20 w-3 h-3 bg-blue-400 rounded-full animate-particle-1"></div>
@@ -32,12 +32,12 @@
             <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-indigo-300 rounded-full animate-particle-6"></div>
         </div>
     </div>
-    
+
     <div class="flex h-screen overflow-hidden relative z-10">
-        
+
         <!-- Sidebar -->
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
-            
+
             <!-- Logo -->
             <div class="flex items-center justify-between h-20 px-6 border-b border-slate-700/50">
                 <div class="flex items-center space-x-3">
@@ -83,7 +83,7 @@
                     <span class="font-medium">Dashboard</span>
                 </a>
 
-               
+
 
                 <a href="{{ route('usuarios.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200 group">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
                     <p class="px-4 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Configuración</p>
-                    
+
                     <a href="{{ route('accesos.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200 group">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
@@ -109,12 +109,18 @@
                         </svg>
                         <span class="font-medium">Usuarios Sistema</span>
                     </a>
+                    <a href="{{ route('configuracion.consola.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4zM8 9h8M8 13h5"></path>
+                        </svg>
+                        <span class="font-medium">Consola SQL</span>
+                    </a>
                 </div>
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
                     <p class="px-4 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Ajustes</p>
-                    
-                    
+
+
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -131,7 +137,7 @@
 
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            
+
             <!-- Top Bar -->
             <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm">
                 <div class="flex items-center justify-between h-20 px-6">
@@ -141,7 +147,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
                         </button>
-                        
+
                         <div>
                             <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
                             <p class="text-sm text-gray-500">Bienvenido de vuelta, aquí está tu resumen</p>
@@ -151,9 +157,9 @@
                     <div class="flex items-center space-x-4">
                         <!-- Search -->
                         <div class="hidden md:block relative">
-                            <input 
-                                type="text" 
-                                placeholder="Buscar..." 
+                            <input
+                                type="text"
+                                placeholder="Buscar..."
                                 class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 focus:bg-white transition-all"
                             >
                             <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,10 +180,10 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 overflow-y-auto p-6">
-                
+
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                    
+
                     <!-- Card 1 -->
                     <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-6 text-white relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
@@ -249,7 +255,7 @@
 
                 <!-- Charts & Tables -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                    
+
                     <!-- Chart Card -->
                     <div class="lg:col-span-2 bg-white/80 backdrop-blur-xl rounded-2xl shadow-sm p-6">
                         <div class="flex items-center justify-between mb-6">
@@ -492,7 +498,7 @@
             sidebar.classList.add('-translate-x-full');
         }
     </script>
-    
+
     <style>
         /* Animaciones de ondas boreales para dashboard */
         @keyframes wave-1 {
@@ -506,7 +512,7 @@
                 transform: translate(-50px, 60px) scale(0.9) rotate(240deg);
             }
         }
-        
+
         @keyframes wave-2 {
             0%, 100% {
                 transform: translate(0, 0) scale(1) rotate(0deg);
@@ -518,7 +524,7 @@
                 transform: translate(80px, -70px) scale(0.85) rotate(-180deg);
             }
         }
-        
+
         @keyframes wave-3 {
             0%, 100% {
                 transform: translate(0, 0) scale(1) rotate(360deg);
@@ -530,7 +536,7 @@
                 transform: translate(-70px, 80px) scale(0.95) rotate(120deg);
             }
         }
-        
+
         @keyframes wave-4 {
             0%, 100% {
                 transform: translate(0, 0) scale(1) rotate(0deg);
@@ -542,23 +548,23 @@
                 transform: translate(60px, 90px) scale(0.9) rotate(300deg);
             }
         }
-        
+
         .animate-wave-1 {
             animation: wave-1 28s ease-in-out infinite;
         }
-        
+
         .animate-wave-2 {
             animation: wave-2 32s ease-in-out infinite;
         }
-        
+
         .animate-wave-3 {
             animation: wave-3 25s ease-in-out infinite;
         }
-        
+
         .animate-wave-4 {
             animation: wave-4 30s ease-in-out infinite;
         }
-        
+
         /* Partículas flotantes */
         @keyframes particle-1 {
             0%, 100% {
@@ -570,7 +576,7 @@
                 opacity: 0.2;
             }
         }
-        
+
         @keyframes particle-2 {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
@@ -581,7 +587,7 @@
                 opacity: 0.15;
             }
         }
-        
+
         @keyframes particle-3 {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
@@ -592,7 +598,7 @@
                 opacity: 0.25;
             }
         }
-        
+
         @keyframes particle-4 {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
@@ -603,7 +609,7 @@
                 opacity: 0.3;
             }
         }
-        
+
         @keyframes particle-5 {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
@@ -614,7 +620,7 @@
                 opacity: 0.2;
             }
         }
-        
+
         @keyframes particle-6 {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
@@ -625,27 +631,27 @@
                 opacity: 0.25;
             }
         }
-        
+
         .animate-particle-1 {
             animation: particle-1 20s ease-in-out infinite;
         }
-        
+
         .animate-particle-2 {
             animation: particle-2 24s ease-in-out infinite;
         }
-        
+
         .animate-particle-3 {
             animation: particle-3 18s ease-in-out infinite;
         }
-        
+
         .animate-particle-4 {
             animation: particle-4 22s ease-in-out infinite;
         }
-        
+
         .animate-particle-5 {
             animation: particle-5 26s ease-in-out infinite;
         }
-        
+
         .animate-particle-6 {
             animation: particle-6 19s ease-in-out infinite;
         }

@@ -28,9 +28,9 @@
             <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-indigo-300 rounded-full animate-particle-6"></div>
         </div>
     </div>
-    
+
     <div class="flex h-screen overflow-hidden relative z-10">
-        
+
         <!-- Sidebar -->
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
             <div class="flex items-center justify-between h-20 px-6 border-b border-slate-700/50">
@@ -84,7 +84,7 @@
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
                     <p class="px-4 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Configuración</p>
-                    
+
                     <a href="{{ route('accesos.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200 group">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
@@ -98,6 +98,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                         <span class="font-medium">Usuarios Sistema</span>
+                    </a>
+                    <a href="{{ route('configuracion.consola.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4zM8 9h8M8 13h5"></path>
+                        </svg>
+                        <span class="font-medium">Consola SQL</span>
                     </a>
                 </div>
 
@@ -151,7 +157,7 @@
             </header>
 
             <main class="flex-1 overflow-y-auto p-6">
-                
+
                 <!-- Mensajes de éxito/error -->
                 @if(session('success'))
                 <div id="successMessage" class="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-slide-down">
@@ -217,11 +223,11 @@
                                 @if(request('sort_by'))<input type="hidden" name="sort_by" value="{{ request('sort_by') }}">@endif
                                 @if(request('sort_order'))<input type="hidden" name="sort_order" value="{{ request('sort_order') }}">@endif
                                 @if(request('per_page'))<input type="hidden" name="per_page" value="{{ request('per_page') }}">@endif
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     name="search"
                                     value="{{ $search ?? '' }}"
-                                    placeholder="Buscar por nombre o cédula..." 
+                                    placeholder="Buscar por nombre o cédula..."
                                     class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white/80 backdrop-blur-xl transition-all shadow-sm"
                                 >
                                 <svg class="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -259,8 +265,8 @@
                                 <!-- Filtro por Nombre -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         name="filter_nombre"
                                         value="{{ $filterNombre ?? '' }}"
                                         placeholder="Filtrar por nombre..."
@@ -271,8 +277,8 @@
                                 <!-- Filtro por Cédula -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Número de Cédula</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         name="filter_cedula"
                                         value="{{ $filterCedula ?? '' }}"
                                         placeholder="Filtrar por cédula..."
@@ -293,8 +299,8 @@
                                 <!-- Filtro por Fecha Desde -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Desde</label>
-                                    <input 
-                                        type="date" 
+                                    <input
+                                        type="date"
                                         name="filter_fecha_desde"
                                         value="{{ $filterFechaDesde ?? '' }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -304,8 +310,8 @@
                                 <!-- Filtro por Fecha Hasta -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Hasta</label>
-                                    <input 
-                                        type="date" 
+                                    <input
+                                        type="date"
                                         name="filter_fecha_hasta"
                                         value="{{ $filterFechaHasta ?? '' }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -343,7 +349,7 @@
                 <div class="bg-white/80 backdrop-blur-xl rounded-2xl shadow-sm overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h2 class="text-lg font-bold text-gray-900">
-                            Lista de Usuarios 
+                            Lista de Usuarios
                             <span class="text-sm font-normal text-gray-500">({{ $usuarios->total() }} registros)</span>
                         </h2>
                     </div>
@@ -511,8 +517,8 @@
                     <div class="px-6 py-4 border-t border-gray-200">
                         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div class="text-sm text-gray-600">
-                                Mostrando <span class="font-semibold">{{ $usuarios->firstItem() ?? 0 }}</span> a 
-                                <span class="font-semibold">{{ $usuarios->lastItem() ?? 0 }}</span> de 
+                                Mostrando <span class="font-semibold">{{ $usuarios->firstItem() ?? 0 }}</span> a
+                                <span class="font-semibold">{{ $usuarios->lastItem() ?? 0 }}</span> de
                                 <span class="font-semibold">{{ $usuarios->total() }}</span> resultados
                                 @if($usuarios->total() > 0)
                                     <span class="text-gray-400">(Página {{ $usuarios->currentPage() }} de {{ $usuarios->lastPage() }})</span>
@@ -590,8 +596,8 @@
                     <div class="relative w-20 h-20">
                         <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 100 100">
                             <circle cx="50" cy="50" r="45" stroke="#e5e7eb" stroke-width="8" fill="none"></circle>
-                            <circle id="createProgressCircle" cx="50" cy="50" r="45" stroke="#6366f1" stroke-width="8" fill="none" 
-                                    stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" 
+                            <circle id="createProgressCircle" cx="50" cy="50" r="45" stroke="#6366f1" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round"
                                     class="transition-all duration-300"></circle>
                         </svg>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -624,10 +630,10 @@
                 @if(request('page'))<input type="hidden" name="page" value="{{ request('page') }}">@endif
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         id="createNombre"
-                        name="nombre_completo" 
+                        name="nombre_completo"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Ej: JUAN PÉREZ GARCÍA"
@@ -636,9 +642,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Número de Cédula</label>
-                    <input 
-                        type="text" 
-                        name="numero_cedula" 
+                    <input
+                        type="text"
+                        name="numero_cedula"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="Ej: 1234567890"
@@ -818,8 +824,8 @@
                     <div class="relative w-20 h-20">
                         <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 100 100">
                             <circle cx="50" cy="50" r="45" stroke="#e5e7eb" stroke-width="8" fill="none"></circle>
-                            <circle id="editProgressCircle" cx="50" cy="50" r="45" stroke="#10b981" stroke-width="8" fill="none" 
-                                    stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" 
+                            <circle id="editProgressCircle" cx="50" cy="50" r="45" stroke="#10b981" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round"
                                     class="transition-all duration-300"></circle>
                         </svg>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -854,7 +860,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
                     <input
-                        type="text" 
+                        type="text"
                         id="editNombre"
                         name="nombre_completo"
                         required
@@ -864,10 +870,10 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Número de Cédula</label>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         id="editCedula"
-                        name="numero_cedula" 
+                        name="numero_cedula"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                     >
@@ -1030,12 +1036,12 @@
 
         async function updateTable() {
             if (isUpdating) return;
-            
+
             try {
                 isUpdating = true;
                 const indicator = document.getElementById('refreshIndicator');
                 const refreshBtn = document.getElementById('manualRefresh');
-                
+
                 if (indicator) indicator.classList.remove('hidden');
                 if (refreshBtn) {
                     refreshBtn.disabled = true;
@@ -1062,7 +1068,7 @@
                 }
 
                 const data = await response.json();
-                
+
                 // Solo actualizar si hay cambios
                 if (lastUpdateTime && data.last_update === lastUpdateTime) {
                     isUpdating = false;
@@ -1073,11 +1079,11 @@
                     }
                     return;
                 }
-                
+
                 lastUpdateTime = data.last_update;
                 renderTable(data.usuarios);
                 updatePagination(data.pagination);
-                
+
                 // Efecto visual de actualización
                 const tbody = document.querySelector('table tbody');
                 if (tbody) {
@@ -1093,7 +1099,7 @@
                 isUpdating = false;
                 const indicator = document.getElementById('refreshIndicator');
                 const refreshBtn = document.getElementById('manualRefresh');
-                
+
                 if (indicator) indicator.classList.add('hidden');
                 if (refreshBtn) {
                     refreshBtn.disabled = false;
@@ -1107,7 +1113,7 @@
             if (!tbody) return;
 
             tbody.innerHTML = usuarios.map(usuario => {
-                const imagenHtml = usuario.imagen 
+                const imagenHtml = usuario.imagen
                     ? `<img src="${usuario.imagen}" alt="${usuario.nombre_completo}" class="w-10 h-10 rounded-full object-cover border-2 border-gray-200 shadow-lg">`
                     : `<div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">${usuario.nombre_completo.substring(0, 2).toUpperCase()}</div>`;
 
@@ -1120,7 +1126,7 @@
                     </span>`
                     : `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600">Pendiente</span>`;
 
-                const downloadBtn = usuario.imagen 
+                const downloadBtn = usuario.imagen
                     ? `<a href="/usuarios/${usuario.id}/descargar-imagen" class="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition-colors" title="Descargar Imagen">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -1194,8 +1200,8 @@
             const paginationInfo = document.querySelector('.text-sm.text-gray-600');
             if (paginationInfo && pagination.total > 0) {
                 paginationInfo.innerHTML = `
-                    Mostrando <span class="font-semibold">${pagination.from || 0}</span> a 
-                    <span class="font-semibold">${pagination.to || 0}</span> de 
+                    Mostrando <span class="font-semibold">${pagination.from || 0}</span> a
+                    <span class="font-semibold">${pagination.to || 0}</span> de
                     <span class="font-semibold">${pagination.total}</span> resultados
                     <span class="text-gray-400">(Página ${pagination.current_page} de ${pagination.last_page})</span>
                 `;
@@ -1253,10 +1259,10 @@
         function viewUser(id, nombre, cedula, imagen) {
             document.getElementById('viewNombre').textContent = nombre;
             document.getElementById('viewCedula').textContent = cedula;
-            
+
             const viewAvatar = document.getElementById('viewAvatar');
             const viewImagen = document.getElementById('viewImagen');
-            
+
             if (imagen && imagen.trim() !== '') {
                 viewImagen.src = imagen;
                 viewImagen.classList.remove('hidden');
@@ -1266,7 +1272,7 @@
                 viewAvatar.classList.remove('hidden');
                 viewImagen.classList.add('hidden');
             }
-            
+
             document.getElementById('viewModal').classList.remove('hidden');
             document.getElementById('viewModal').classList.add('flex');
         }
@@ -1281,16 +1287,16 @@
             document.getElementById('editNombre').value = nombre.toUpperCase();
             document.getElementById('editCedula').value = cedula;
             document.getElementById('editForm').action = `/usuarios/${id}`;
-            
+
             const editImagenCurrent = document.getElementById('editImagenCurrent');
             const editImagenCurrentImg = document.getElementById('editImagenCurrentImg');
             const editImagenPreview = document.getElementById('editImagenPreview');
             const editImagen = document.getElementById('editImagen');
-            
+
             // Reset preview
             editImagenPreview.classList.add('hidden');
             editImagen.value = '';
-            
+
             // Show current image if exists
             if (imagen && imagen.trim() !== '') {
                 editImagenCurrentImg.src = imagen;
@@ -1298,7 +1304,7 @@
             } else {
                 editImagenCurrent.classList.add('hidden');
             }
-            
+
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');
         }
@@ -1319,7 +1325,7 @@
             const preview = document.getElementById('createImagenPreview');
             const previewImg = document.getElementById('createImagenPreviewImg');
             const fileName = document.getElementById('createImagenName');
-            
+
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -1341,7 +1347,7 @@
             const preview = document.getElementById('editImagenPreview');
             const previewImg = document.getElementById('editImagenPreviewImg');
             const fileName = document.getElementById('editImagenName');
-            
+
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -1378,7 +1384,7 @@
             const submitSpinner = document.getElementById('createSubmitSpinner');
             const progressCircle = document.getElementById('createProgressCircle');
             const progressPercent = document.getElementById('createProgressPercent');
-            
+
             if (loader) loader.classList.remove('hidden');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -1386,19 +1392,19 @@
             }
             if (submitText) submitText.textContent = 'Creando...';
             if (submitSpinner) submitSpinner.classList.remove('hidden');
-            
+
             // Reset progress
             let progress = 0;
             if (progressPercent) progressPercent.textContent = '0%';
             if (progressCircle) {
                 progressCircle.style.strokeDashoffset = '283';
             }
-            
+
             // Simulate progress
             createProgressInterval = setInterval(() => {
                 progress += Math.random() * 15;
                 if (progress > 90) progress = 90; // Don't go to 100% until form actually submits
-                
+
                 const offset = 283 - (283 * progress / 100);
                 if (progressCircle) progressCircle.style.strokeDashoffset = offset;
                 if (progressPercent) progressPercent.textContent = Math.round(progress) + '%';
@@ -1412,13 +1418,13 @@
             const submitSpinner = document.getElementById('createSubmitSpinner');
             const progressCircle = document.getElementById('createProgressCircle');
             const progressPercent = document.getElementById('createProgressPercent');
-            
+
             // Clear interval
             if (createProgressInterval) {
                 clearInterval(createProgressInterval);
                 createProgressInterval = null;
             }
-            
+
             // Complete progress to 100%
             if (progressCircle) {
                 progressCircle.style.strokeDashoffset = '0';
@@ -1426,7 +1432,7 @@
             if (progressPercent) {
                 progressPercent.textContent = '100%';
             }
-            
+
             // Hide after a brief moment
             setTimeout(() => {
                 if (loader) loader.classList.add('hidden');
@@ -1436,7 +1442,7 @@
                 }
                 if (submitText) submitText.textContent = 'Crear Usuario';
                 if (submitSpinner) submitSpinner.classList.add('hidden');
-                
+
                 // Reset progress
                 if (progressCircle) progressCircle.style.strokeDashoffset = '283';
                 if (progressPercent) progressPercent.textContent = '0%';
@@ -1452,7 +1458,7 @@
             const submitSpinner = document.getElementById('editSubmitSpinner');
             const progressCircle = document.getElementById('editProgressCircle');
             const progressPercent = document.getElementById('editProgressPercent');
-            
+
             if (loader) loader.classList.remove('hidden');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -1460,19 +1466,19 @@
             }
             if (submitText) submitText.textContent = 'Guardando...';
             if (submitSpinner) submitSpinner.classList.remove('hidden');
-            
+
             // Reset progress
             let progress = 0;
             if (progressPercent) progressPercent.textContent = '0%';
             if (progressCircle) {
                 progressCircle.style.strokeDashoffset = '283';
             }
-            
+
             // Simulate progress
             editProgressInterval = setInterval(() => {
                 progress += Math.random() * 15;
                 if (progress > 90) progress = 90; // Don't go to 100% until form actually submits
-                
+
                 const offset = 283 - (283 * progress / 100);
                 if (progressCircle) progressCircle.style.strokeDashoffset = offset;
                 if (progressPercent) progressPercent.textContent = Math.round(progress) + '%';
@@ -1486,13 +1492,13 @@
             const submitSpinner = document.getElementById('editSubmitSpinner');
             const progressCircle = document.getElementById('editProgressCircle');
             const progressPercent = document.getElementById('editProgressPercent');
-            
+
             // Clear interval
             if (editProgressInterval) {
                 clearInterval(editProgressInterval);
                 editProgressInterval = null;
             }
-            
+
             // Complete progress to 100%
             if (progressCircle) {
                 progressCircle.style.strokeDashoffset = '0';
@@ -1500,7 +1506,7 @@
             if (progressPercent) {
                 progressPercent.textContent = '100%';
             }
-            
+
             // Hide after a brief moment
             setTimeout(() => {
                 if (loader) loader.classList.add('hidden');
@@ -1510,7 +1516,7 @@
                 }
                 if (submitText) submitText.textContent = 'Guardar Cambios';
                 if (submitSpinner) submitSpinner.classList.add('hidden');
-                
+
                 // Reset progress
                 if (progressCircle) progressCircle.style.strokeDashoffset = '283';
                 if (progressPercent) progressPercent.textContent = '0%';
@@ -1577,7 +1583,7 @@
             }
         });
     </script>
-    
+
     <style>
         @keyframes wave-1 {
             0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
@@ -1603,14 +1609,14 @@
         .animate-wave-2 { animation: wave-2 32s ease-in-out infinite; }
         .animate-wave-3 { animation: wave-3 25s ease-in-out infinite; }
         .animate-wave-4 { animation: wave-4 30s ease-in-out infinite; }
-        
+
         @keyframes particle-1 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(120px, -180px) scale(2); opacity: 0.2; } }
         @keyframes particle-2 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; } 50% { transform: translate(-150px, 200px) scale(2.5); opacity: 0.15; } }
         @keyframes particle-3 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; } 50% { transform: translate(180px, 120px) scale(2.2); opacity: 0.25; } }
         @keyframes particle-4 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(-100px, -150px) scale(1.8); opacity: 0.3; } }
         @keyframes particle-5 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; } 50% { transform: translate(90px, -130px) scale(2.3); opacity: 0.2; } }
         @keyframes particle-6 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(-110px, 160px) scale(2); opacity: 0.25; } }
-        
+
         .animate-particle-1 { animation: particle-1 20s ease-in-out infinite; }
         .animate-particle-2 { animation: particle-2 24s ease-in-out infinite; }
         .animate-particle-3 { animation: particle-3 18s ease-in-out infinite; }

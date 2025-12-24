@@ -28,7 +28,7 @@
             <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-indigo-300 rounded-full animate-particle-6"></div>
         </div>
     </div>
-    
+
     <div class="flex h-screen overflow-hidden relative z-10">
         <!-- Sidebar -->
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
@@ -83,7 +83,7 @@
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
                     <p class="px-4 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Configuración</p>
-                    
+
                     <a href="{{ route('accesos.index') }}" class="flex items-center space-x-3 px-4 py-3 text-white bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border-l-4 border-blue-500 rounded-lg transition-all duration-200">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
@@ -97,6 +97,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                         <span class="font-medium">Usuarios Sistema</span>
+                    </a>
+                    <a href="{{ route('configuracion.consola.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4zM8 9h8M8 13h5"></path>
+                        </svg>
+                        <span class="font-medium">Consola SQL</span>
                     </a>
                 </div>
 
@@ -207,11 +213,11 @@
                                 @if(request('sort_by'))<input type="hidden" name="sort_by" value="{{ request('sort_by') }}">@endif
                                 @if(request('sort_order'))<input type="hidden" name="sort_order" value="{{ request('sort_order') }}">@endif
                                 @if(request('per_page'))<input type="hidden" name="per_page" value="{{ request('per_page') }}">@endif
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     name="search"
                                     value="{{ $search ?? '' }}"
-                                    placeholder="Buscar por usuario o URL..." 
+                                    placeholder="Buscar por usuario o URL..."
                                     class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white/80 backdrop-blur-xl transition-all shadow-sm"
                                 >
                                 <svg class="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -250,8 +256,8 @@
                                 <!-- Filtro por URL -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">URL</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         name="filter_url"
                                         value="{{ $filterUrl ?? '' }}"
                                         placeholder="Filtrar por URL..."
@@ -262,8 +268,8 @@
                                 <!-- Filtro por Usuario -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Usuario</label>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         name="filter_user"
                                         value="{{ $filterUser ?? '' }}"
                                         placeholder="Filtrar por usuario..."
@@ -274,8 +280,8 @@
                                 <!-- Filtro por Fecha Desde -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Desde</label>
-                                    <input 
-                                        type="date" 
+                                    <input
+                                        type="date"
                                         name="filter_fecha_desde"
                                         value="{{ $filterFechaDesde ?? '' }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -285,8 +291,8 @@
                                 <!-- Filtro por Fecha Hasta -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Hasta</label>
-                                    <input 
-                                        type="date" 
+                                    <input
+                                        type="date"
                                         name="filter_fecha_hasta"
                                         value="{{ $filterFechaHasta ?? '' }}"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -345,7 +351,7 @@
                 <div class="bg-white/80 backdrop-blur-xl rounded-2xl shadow-sm overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h2 class="text-lg font-bold text-gray-900">
-                            Lista de Accesos 
+                            Lista de Accesos
                             <span class="text-sm font-normal text-gray-500">({{ $accesos->total() }} registros)</span>
                         </h2>
                     </div>
@@ -377,8 +383,8 @@
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
                                             <span id="password-{{ $acceso->id }}" class="text-gray-500 font-mono text-sm">••••••••</span>
-                                            <button 
-                                                onclick="togglePassword({{ $acceso->id }}, '{{ $plataforma }}')" 
+                                            <button
+                                                onclick="togglePassword({{ $acceso->id }}, '{{ $plataforma }}')"
                                                 class="p-1 text-gray-400 hover:text-indigo-600 transition-colors cursor-pointer"
                                                 title="Ver contraseña"
                                                 id="eye-btn-{{ $acceso->id }}"
@@ -431,8 +437,8 @@
                     <div class="px-6 py-4 border-t border-gray-200">
                         <div class="flex items-center justify-between">
                             <div class="text-sm text-gray-600">
-                                Mostrando <span class="font-semibold">{{ $accesos->firstItem() ?? 0 }}</span> a 
-                                <span class="font-semibold">{{ $accesos->lastItem() ?? 0 }}</span> de 
+                                Mostrando <span class="font-semibold">{{ $accesos->firstItem() ?? 0 }}</span> a
+                                <span class="font-semibold">{{ $accesos->lastItem() ?? 0 }}</span> de
                                 <span class="font-semibold">{{ $accesos->total() }}</span> resultados
                             </div>
                             <div class="flex items-center space-x-2">
@@ -581,8 +587,8 @@
                 @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Plataforma *</label>
-                    <select 
-                        name="plataforma" 
+                    <select
+                        name="plataforma"
                         id="createPlataforma"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-white"
@@ -594,9 +600,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">URL</label>
-                    <input 
-                        type="url" 
-                        name="url" 
+                    <input
+                        type="url"
+                        name="url"
                         id="createUrl"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                         placeholder="https://ejemplo.com"
@@ -604,9 +610,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Usuario *</label>
-                    <input 
-                        type="text" 
-                        name="user" 
+                    <input
+                        type="text"
+                        name="user"
                         id="createUser"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
@@ -615,9 +621,9 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña *</label>
-                    <input 
-                        type="password" 
-                        name="password" 
+                    <input
+                        type="password"
+                        name="password"
                         id="createPassword"
                         required
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
@@ -715,25 +721,25 @@
 
         // Password toggle function
         const passwordTimeouts = {};
-        
+
         function togglePassword(id, plataforma) {
             const passwordSpan = document.getElementById(`password-${id}`);
             const eyeBtn = document.getElementById(`eye-btn-${id}`);
             const eyeIcon = document.getElementById(`eye-icon-${id}`);
-            
+
             // Si ya hay un timeout activo, cancelarlo
             if (passwordTimeouts[id]) {
                 clearTimeout(passwordTimeouts[id]);
                 delete passwordTimeouts[id];
             }
-            
+
             // Si la contraseña ya está visible, ocultarla
             if (passwordSpan.dataset.visible === 'true') {
                 passwordSpan.textContent = '••••••••';
                 passwordSpan.dataset.visible = 'false';
                 passwordSpan.classList.remove('text-indigo-600', 'font-semibold');
                 passwordSpan.classList.add('text-gray-500');
-                
+
                 // Restaurar icono de ojo abierto
                 eyeIcon.innerHTML = `
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -743,11 +749,11 @@
                 eyeBtn.classList.add('text-gray-400');
                 return;
             }
-            
+
             // Deshabilitar el botón mientras se carga
             eyeBtn.disabled = true;
             passwordSpan.textContent = 'Cargando...';
-            
+
             // Hacer petición AJAX para obtener la contraseña
             fetch(`/accesos/${id}/password?plataforma=${plataforma}`, {
                 method: 'GET',
@@ -759,28 +765,28 @@
             .then(response => response.json())
             .then(data => {
                 eyeBtn.disabled = false;
-                
+
                 if (data.success) {
                     // Mostrar la contraseña
                     passwordSpan.textContent = data.password;
                     passwordSpan.dataset.visible = 'true';
                     passwordSpan.classList.remove('text-gray-500');
                     passwordSpan.classList.add('text-indigo-600', 'font-semibold');
-                    
+
                     // Cambiar icono a ojo cerrado
                     eyeIcon.innerHTML = `
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
                     `;
                     eyeBtn.classList.remove('text-gray-400');
                     eyeBtn.classList.add('text-indigo-600');
-                    
+
                     // Ocultar automáticamente después de 7 segundos
                     passwordTimeouts[id] = setTimeout(() => {
                         passwordSpan.textContent = '••••••••';
                         passwordSpan.dataset.visible = 'false';
                         passwordSpan.classList.remove('text-indigo-600', 'font-semibold');
                         passwordSpan.classList.add('text-gray-500');
-                        
+
                         // Restaurar icono de ojo abierto
                         eyeIcon.innerHTML = `
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -879,14 +885,14 @@
         .animate-wave-2 { animation: wave-2 32s ease-in-out infinite; }
         .animate-wave-3 { animation: wave-3 25s ease-in-out infinite; }
         .animate-wave-4 { animation: wave-4 30s ease-in-out infinite; }
-        
+
         @keyframes particle-1 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(120px, -180px) scale(2); opacity: 0.2; } }
         @keyframes particle-2 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; } 50% { transform: translate(-150px, 200px) scale(2.5); opacity: 0.15; } }
         @keyframes particle-3 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; } 50% { transform: translate(180px, 120px) scale(2.2); opacity: 0.25; } }
         @keyframes particle-4 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(-100px, -150px) scale(1.8); opacity: 0.3; } }
         @keyframes particle-5 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; } 50% { transform: translate(90px, -130px) scale(2.3); opacity: 0.2; } }
         @keyframes particle-6 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; } 50% { transform: translate(-110px, 160px) scale(2); opacity: 0.25; } }
-        
+
         .animate-particle-1 { animation: particle-1 20s ease-in-out infinite; }
         .animate-particle-2 { animation: particle-2 24s ease-in-out infinite; }
         .animate-particle-3 { animation: particle-3 18s ease-in-out infinite; }
@@ -902,4 +908,3 @@
     </style>
 </body>
 </html>
-
