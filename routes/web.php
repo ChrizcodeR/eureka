@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuarioSistemaController;
+use App\Http\Controllers\AccesoController;
 
 // Ruta pública para buscar usuario por cédula
 Route::get('/', [UsuarioController::class, 'publicSearch'])->name('public.search');
@@ -33,3 +34,14 @@ Route::get('/configuracion/usuarios-sistema', [UsuarioSistemaController::class, 
 Route::post('/configuracion/usuarios-sistema', [UsuarioSistemaController::class, 'store'])->name('configuracion.usuarios-sistema.store');
 Route::put('/configuracion/usuarios-sistema/{id}', [UsuarioSistemaController::class, 'update'])->name('configuracion.usuarios-sistema.update');
 Route::delete('/configuracion/usuarios-sistema/{id}', [UsuarioSistemaController::class, 'destroy'])->name('configuracion.usuarios-sistema.destroy');
+
+// Log de Accesos (requiere autenticación)
+Route::get('/accesos', [AccesoController::class, 'index'])->name('accesos.index');
+Route::get('/accesos/create', [AccesoController::class, 'create'])->name('accesos.create');
+Route::post('/accesos', [AccesoController::class, 'store'])->name('accesos.store');
+Route::get('/accesos/plantilla', [AccesoController::class, 'downloadTemplate'])->name('accesos.template');
+Route::post('/accesos/importar', [AccesoController::class, 'import'])->name('accesos.import');
+Route::get('/accesos/{id}/edit', [AccesoController::class, 'edit'])->name('accesos.edit');
+Route::get('/accesos/{id}/password', [AccesoController::class, 'getPassword'])->name('accesos.password');
+Route::put('/accesos/{id}', [AccesoController::class, 'update'])->name('accesos.update');
+Route::delete('/accesos/{id}', [AccesoController::class, 'destroy'])->name('accesos.destroy');
