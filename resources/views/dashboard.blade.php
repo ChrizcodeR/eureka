@@ -115,6 +115,12 @@
                         </svg>
                         <span class="font-medium">Consola SQL</span>
                     </a>
+                    <a href="{{ route('configuracion.correo.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0a4 4 0 00-4-4m4 4a4 4 0 11-8 0m8 0v4m-8-4v4"/>
+                        </svg>
+                        <span class="font-medium">Servidor de Correo</span>
+                    </a>
                 </div>
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
@@ -658,4 +664,3 @@
     </style>
 </body>
 </html>
-

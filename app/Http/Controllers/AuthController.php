@@ -18,7 +18,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
-        
+
         return view('login');
     }
 
@@ -54,8 +54,8 @@ class AuthController extends Controller
         $passwordHash = $usuario->getAttributes()['password'] ?? $usuario->password;
 
         // Verificar que el hash sea válido antes de intentar verificar
-        $isValidHash = str_starts_with($passwordHash, '$2y$') || 
-                       str_starts_with($passwordHash, '$2a$') || 
+        $isValidHash = str_starts_with($passwordHash, '$2y$') ||
+                       str_starts_with($passwordHash, '$2a$') ||
                        str_starts_with($passwordHash, '$2b$');
 
         if (!$isValidHash) {
@@ -86,7 +86,8 @@ class AuthController extends Controller
         $request->session()->put('user_email', $usuario->email);
         $request->session()->put('user_nombre', $usuario->nombre);
         $request->session()->put('user_id', $usuario->id);
-        
+        $request->session()->put('user_role', $usuario->role ?? 'admin');
+
         return redirect()->route('dashboard');
     }
 
@@ -110,7 +111,7 @@ class AuthController extends Controller
     {
         // Limpiar la sesión
         $request->session()->flush();
-        
+
         return redirect()->route('login');
     }
 }

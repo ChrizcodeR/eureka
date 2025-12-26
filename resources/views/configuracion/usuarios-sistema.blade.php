@@ -83,13 +83,14 @@
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
                     <p class="px-4 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Configuración</p>
-
+                    @if((session('user_role') ?? 'admin') === 'root')
                     <a href="{{ route('accesos.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200 group">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
                         </svg>
                         <span class="font-medium">Log de Accesos</span>
                     </a>
+                    @endif
 
                     <a href="{{ route('configuracion.usuarios-sistema.index') }}" class="flex items-center space-x-3 px-4 py-3 text-white bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border-l-4 border-blue-500 rounded-lg transition-all duration-200">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,12 +99,20 @@
                         </svg>
                         <span class="font-medium">Usuarios Sistema</span>
                     </a>
+                    @if((session('user_role') ?? 'admin') === 'root')
                     <a href="{{ route('configuracion.consola.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4zM8 9h8M8 13h5"></path>
                         </svg>
                         <span class="font-medium">Consola SQL</span>
                     </a>
+                    <a href="{{ route('configuracion.correo.index') }}" class="flex items-center space-x-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0a4 4 0 00-4-4m4 4a4 4 0 11-8 0m8 0v4m-8-4v4"/>
+                        </svg>
+                        <span class="font-medium">Servidor</span>
+                    </a>
+                    @endif
                 </div>
 
                 <div class="pt-6 mt-6 border-t border-slate-700/50">
@@ -210,6 +219,7 @@
                                 <tr>
                                     <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Nombre</th>
                                     <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
+                                    <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Rol</th>
                                     <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Estado</th>
                                     <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Fecha Creación</th>
                                     <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Acciones</th>
@@ -223,6 +233,9 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="text-gray-700">{{ $usuario->email }}</span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-gray-700">{{ ucfirst($usuario->role ?? 'admin') }}</span>
                                     </td>
                                     <td class="py-4 px-6">
                                         @if($usuario->activo)
@@ -240,7 +253,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
-                                            <button onclick="editUser({{ $usuario->id }}, '{{ addslashes($usuario->nombre ?? '') }}', '{{ $usuario->email }}', {{ $usuario->activo ? 'true' : 'false' }})" class="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors" title="Editar">
+                                            <button onclick="editUser({{ $usuario->id }}, '{{ addslashes($usuario->nombre ?? '') }}', '{{ $usuario->email }}', '{{ $usuario->role ?? 'admin' }}', {{ $usuario->activo ? 'true' : 'false' }})" class="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors" title="Editar">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                                 </svg>
@@ -379,6 +392,18 @@
                     >
                     <label for="createActivo" class="ml-2 text-sm text-gray-700">Usuario activo</label>
                 </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rol</label>
+                    @php $roleSel = old('role', 'admin'); @endphp
+                    <select name="role" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                        @if((session('user_role') ?? 'admin') === 'root')
+                            <option value="admin" {{ $roleSel==='admin'?'selected':'' }}>admin</option>
+                            <option value="root" {{ $roleSel==='root'?'selected':'' }}>root</option>
+                        @else
+                            <option value="admin" selected>admin</option>
+                        @endif
+                    </select>
+                </div>
                 <div class="flex space-x-3 pt-4">
                     <button type="button" onclick="closeCreateModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors">
                         Cancelar
@@ -454,6 +479,17 @@
                     >
                     <label for="editActivo" class="ml-2 text-sm text-gray-700">Usuario activo</label>
                 </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rol</label>
+                    <select name="role" id="editRole" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                        @if((session('user_role') ?? 'admin') === 'root')
+                            <option value="admin">admin</option>
+                            <option value="root">root</option>
+                        @else
+                            <option value="admin">admin</option>
+                        @endif
+                    </select>
+                </div>
                 <div class="flex space-x-3 pt-4">
                     <button type="button" onclick="closeEditModal()" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors">
                         Cancelar
@@ -525,9 +561,11 @@
         }
 
         // Modal functions - Edit
-        function editUser(id, nombre, email, activo) {
+        function editUser(id, nombre, email, role, activo) {
             document.getElementById('editNombre').value = nombre ? nombre.toUpperCase() : '';
             document.getElementById('editEmail').value = email;
+            const roleSelect = document.getElementById('editRole');
+            if (roleSelect) { roleSelect.value = role || 'admin'; }
             document.getElementById('editActivo').checked = activo;
             document.getElementById('editForm').action = `/configuracion/usuarios-sistema/${id}`;
 

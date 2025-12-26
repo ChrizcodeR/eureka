@@ -57,6 +57,9 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $search = $request->get('search', '');
@@ -69,7 +72,7 @@ class AccesoController extends Controller
         $perPage = $request->get('per_page', 10);
 
         $modelClass = $this->getModelClass($plataforma);
-        
+
         if (!$modelClass) {
             return redirect()->route('accesos.index', ['plataforma' => 'ODOO'])
                 ->with('error', 'Plataforma no válida');
@@ -109,7 +112,7 @@ class AccesoController extends Controller
         $allowedSorts = ['url', 'user', 'created_at', 'updated_at'];
         $sortBy = in_array($sortBy, $allowedSorts) ? $sortBy : 'created_at';
         $sortOrder = in_array($sortOrder, ['asc', 'desc']) ? $sortOrder : 'desc';
-        
+
         $query->orderBy($sortBy, $sortOrder);
 
         // Validar per_page
@@ -121,16 +124,16 @@ class AccesoController extends Controller
         $plataformas = ['ODOO', 'CORREO', 'ADDI', 'SISTECREDITO', 'ESMIO', 'SUMASPAY'];
 
         return view('accesos.index', compact(
-            'accesos', 
-            'search', 
+            'accesos',
+            'search',
             'filterUrl',
             'filterUser',
             'filterFechaDesde',
             'filterFechaHasta',
             'sortBy',
             'sortOrder',
-            'perPage', 
-            'plataforma', 
+            'perPage',
+            'plataforma',
             'plataformas'
         ));
     }
@@ -145,6 +148,9 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         // Redirigir al index con el modal (se maneja desde el frontend)
         return redirect()->route('accesos.index', ['plataforma' => $request->get('plataforma', 'ODOO')]);
@@ -158,6 +164,9 @@ class AccesoController extends Controller
         // Verificar autenticación
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
+        }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
         }
 
         $request->validate([
@@ -174,7 +183,7 @@ class AccesoController extends Controller
         ]);
 
         $modelClass = $this->getModelClass($request->plataforma);
-        
+
         if (!$modelClass) {
             return redirect()->route('accesos.index')
                 ->with('error', 'Plataforma no válida');
@@ -200,17 +209,20 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $modelClass = $this->getModelClass($plataforma);
-        
+
         if (!$modelClass) {
             return redirect()->route('accesos.index')
                 ->with('error', 'Plataforma no válida');
         }
 
         $acceso = $modelClass::findOrFail($id);
-        
+
         // Desencriptar la contraseña para mostrarla en el formulario
         try {
             $acceso->password_decrypted = Crypt::decryptString($acceso->password);
@@ -232,10 +244,13 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $modelClass = $this->getModelClass($plataforma);
-        
+
         if (!$modelClass) {
             return redirect()->route('accesos.index')
                 ->with('error', 'Plataforma no válida');
@@ -272,10 +287,13 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return response()->json(['success' => false, 'message' => 'No autorizado'], 403);
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $modelClass = $this->getModelClass($plataforma);
-        
+
         if (!$modelClass) {
             return response()->json(['success' => false, 'message' => 'Plataforma no válida'], 400);
         }
@@ -298,16 +316,19 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return response()->json(['success' => false, 'message' => 'No autorizado'], 403);
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $modelClass = $this->getModelClass($plataforma);
-        
+
         if (!$modelClass) {
             return response()->json(['success' => false, 'message' => 'Plataforma no válida'], 400);
         }
 
         $acceso = $modelClass::findOrFail($id);
-        
+
         try {
             $password = Crypt::decryptString($acceso->password);
             return response()->json([
@@ -331,6 +352,9 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $filename = 'plantilla_accesos_' . strtolower($plataforma) . '_' . date('Y-m-d') . '.xlsx';
@@ -347,10 +371,13 @@ class AccesoController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         $plataforma = $request->get('plataforma', 'ODOO');
         $modelClass = $this->getModelClass($plataforma);
-        
+
         if (!$modelClass) {
             return redirect()->route('accesos.index', ['plataforma' => $plataforma])
                 ->with('error', 'Plataforma no válida');
@@ -371,11 +398,11 @@ class AccesoController extends Controller
             if (!empty($reader) && !empty($reader[0])) {
                 $plataformaExcel = null;
                 $plataformasValidas = ['ODOO', 'CORREO', 'ADDI', 'SISTECREDITO', 'ESMIO', 'SUMASPAY'];
-                
+
                 // Buscar en la primera fila de datos (fila 2, índice 1, después del encabezado)
                 if (count($reader[0]) > 1) {
                     $primeraFilaDatos = $reader[0][1]; // Segunda fila (después del encabezado)
-                    
+
                     // Buscar la columna plataforma (primera columna generalmente)
                     if (isset($primeraFilaDatos[0])) {
                         $valorColumnaA = strtoupper(trim((string)$primeraFilaDatos[0]));
@@ -383,7 +410,7 @@ class AccesoController extends Controller
                             $plataformaExcel = $valorColumnaA;
                         }
                     }
-                    
+
                     // Si no se encontró en la primera columna, buscar en todas las columnas
                     if (!$plataformaExcel) {
                         foreach ($primeraFilaDatos as $valor) {
@@ -397,7 +424,7 @@ class AccesoController extends Controller
                         }
                     }
                 }
-                
+
                 // Validar que coincida
                 if ($plataformaExcel && $plataformaExcel !== strtoupper($plataforma)) {
                     return redirect()->route('accesos.index', ['plataforma' => $plataforma])
@@ -406,7 +433,7 @@ class AccesoController extends Controller
             }
 
             $import = new AccesosImport($modelClass, $plataforma);
-            
+
             Excel::import($import, $request->file('archivo'));
 
             // Obtener estadísticas
@@ -437,20 +464,20 @@ class AccesoController extends Controller
             foreach ($failures as $failure) {
                 $mensaje .= "Fila {$failure->row()}: " . implode(', ', $failure->errors()) . ' ';
             }
-            
+
             return redirect()->route('accesos.index', ['plataforma' => $plataforma])
                 ->with('error', $mensaje);
         } catch (\Exception $e) {
             \Log::error('Error al importar accesos: ' . $e->getMessage());
             \Log::error('Stack trace: ' . $e->getTraceAsString());
-            
+
             // Verificar si el error es por plataforma no coincidente
             $mensajeError = $e->getMessage();
             if (strpos($mensajeError, 'no coincide con la plataforma seleccionada') !== false) {
                 return redirect()->route('accesos.index', ['plataforma' => $plataforma])
                     ->with('error', $mensajeError);
             }
-            
+
             return redirect()->route('accesos.index', ['plataforma' => $plataforma])
                 ->with('error', 'Error al importar el archivo: ' . $mensajeError);
         }

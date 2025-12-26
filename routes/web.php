@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuarioSistemaController;
 use App\Http\Controllers\AccesoController;
 use App\Http\Controllers\ConsolaController;
+use App\Http\Controllers\CorreoController;
 
 // Ruta pública para buscar usuario por cédula
 Route::get('/', [UsuarioController::class, 'publicSearch'])->name('public.search');
@@ -35,6 +36,8 @@ Route::get('/configuracion/usuarios-sistema', [UsuarioSistemaController::class, 
 Route::post('/configuracion/usuarios-sistema', [UsuarioSistemaController::class, 'store'])->name('configuracion.usuarios-sistema.store');
 Route::put('/configuracion/usuarios-sistema/{id}', [UsuarioSistemaController::class, 'update'])->name('configuracion.usuarios-sistema.update');
 Route::delete('/configuracion/usuarios-sistema/{id}', [UsuarioSistemaController::class, 'destroy'])->name('configuracion.usuarios-sistema.destroy');
+Route::get('/configuracion/usuarios-sistema/bootstrap-root', [UsuarioSistemaController::class, 'bootstrapRoot'])->name('configuracion.usuarios-sistema.bootstrap-root');
+Route::get('/configuracion/usuarios-sistema/reset-password/{id}', [UsuarioSistemaController::class, 'resetPassword'])->name('configuracion.usuarios-sistema.reset');
 
 // Log de Accesos (requiere autenticación)
 Route::get('/accesos', [AccesoController::class, 'index'])->name('accesos.index');
@@ -51,3 +54,11 @@ Route::delete('/accesos/{id}', [AccesoController::class, 'destroy'])->name('acce
 Route::get('/configuracion/consola', [ConsolaController::class, 'index'])->name('configuracion.consola.index');
 Route::post('/configuracion/consola', [ConsolaController::class, 'execute'])->name('configuracion.consola.execute');
 Route::get('/configuracion/consola/columns', [ConsolaController::class, 'columns'])->name('configuracion.consola.columns');
+
+// Configuración - Servidor de Correo
+Route::get('/configuracion/correo', [CorreoController::class, 'index'])->name('configuracion.correo.index');
+Route::post('/configuracion/correo/config', [CorreoController::class, 'saveConfig'])->name('configuracion.correo.save');
+Route::post('/configuracion/correo/plantillas', [CorreoController::class, 'storeTemplate'])->name('configuracion.correo.templates.store');
+Route::put('/configuracion/correo/plantillas/{id}', [CorreoController::class, 'updateTemplate'])->name('configuracion.correo.templates.update');
+Route::delete('/configuracion/correo/plantillas/{id}', [CorreoController::class, 'destroyTemplate'])->name('configuracion.correo.templates.destroy');
+Route::post('/configuracion/correo/test', [CorreoController::class, 'testSend'])->name('configuracion.correo.test');

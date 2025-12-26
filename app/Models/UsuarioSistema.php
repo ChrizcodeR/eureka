@@ -14,6 +14,7 @@ class UsuarioSistema extends Model
         'email',
         'password',
         'activo',
+        'role',
     ];
 
     protected $hidden = [
@@ -22,6 +23,7 @@ class UsuarioSistema extends Model
 
     protected $casts = [
         'activo' => 'boolean',
+        'role' => 'string',
     ];
 
     public function setPasswordAttribute($value): void

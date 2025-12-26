@@ -12,6 +12,9 @@ class ConsolaController extends Controller
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
         }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
+        }
 
         $sql = '';
         $rows = [];
@@ -50,6 +53,9 @@ class ConsolaController extends Controller
     {
         if (!$request->session()->get('authenticated')) {
             return redirect()->route('login');
+        }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return redirect()->route('dashboard')->with('error', 'No autorizado');
         }
 
         $validated = $request->validate([
@@ -147,6 +153,9 @@ class ConsolaController extends Controller
     {
         if (!$request->session()->get('authenticated')) {
             return response()->json(['error' => 'No autorizado'], 401);
+        }
+        if (($request->session()->get('user_role') ?? 'admin') !== 'root') {
+            return response()->json(['error' => 'No autorizado'], 403);
         }
 
         $table = $request->query('table');
